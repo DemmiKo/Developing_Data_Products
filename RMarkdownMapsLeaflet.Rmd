@@ -1,0 +1,43 @@
+---
+title: "My shops in map"
+author: "Athens shops"
+output: html_document
+---
+
+### `r format(Sys.Date(),format="%B %d %Y")`
+```{r date, include=FALSE}
+library(leaflet)
+
+# make icons
+shopicons <- makeIcon(
+  iconUrl = "http://seacliffehotel.com/wp-content/uploads/2015/08/facebook-verified-account-logo-300x300.png",
+  iconWidth = 31*215/230, 
+  iconHeight = 31,
+  iconAnchorX = 31*215/230/2,
+  iconAnchorY = 16
+)
+
+# url links
+shoplinks <- c(
+  "<a href = 'https://en.wikipedia.org/wiki/Athens'> Shop 1 </a>",
+  "<a href = 'https://en.wikipedia.org/wiki/Athens'> Shop 2 </a>",
+  "<a href = 'https://en.wikipedia.org/wiki/Athens'> Shop 3 </a>",
+  "<a href = 'https://en.wikipedia.org/wiki/Athens'> Shop 4 </a>"
+)
+
+
+# dataset
+coordinates <- data.frame(lat = c(37.975634, 37.939233, 38.022326, 37.862357),
+                          lng = c(23.733972, 23.661245, 23.800967, 23.752580))
+```
+
+
+
+```{r maps, echo=FALSE}
+coordinates %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(icon = shopicons, popup = shoplinks)
+
+```
+
